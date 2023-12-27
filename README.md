@@ -1,7 +1,7 @@
 # Projet Balancier Machine Learning
 The aim of the project is to predict if a pendulum is mooving or not. We use keras, tensorflow machine learning plugins.
 
-﻿# **Développeurs** 
+﻿## **Développeurs** 
 LEROY Corentin
 TABARAUD Nicolas
 
