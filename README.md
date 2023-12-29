@@ -75,4 +75,4 @@ Mais nous avons obtenu des meilleurs résultats avec le SGD (Stochastic Gradient
 
 Nos résultats n'étaient pas à la hauteur de nos attentes donc nous avons ajouté plusieurs couches cachés où nous avons augmenté les perceptrons sur chaque couches internes. Mais aussi, nous avons ajouter des Dropout pour désactiver aléatoirement certains neuronnes, ce qui permet de stabiliser le modèle, et donc réduire l'overfitting.
 
-Enfin, nouvons qu'en utilisant des fonctions de pénalisation l1 ou l2 pouvaient être utiles donc nous avons utilisé l2.
+Enfin, nous avons vu qu'en utilisant des fonctions de pénalisation l1 ou l2 pouvaient être utiles donc nous avons utilisé l2.
