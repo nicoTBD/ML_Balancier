@@ -165,6 +165,14 @@ static int ai_run(void)
     return -1;
   }
 
+  // Vérifiez la valeur de labélisation de l'axe X
+  if (data_outs[0][0] == 1) {
+    // Activez la LED
+    HAL_GPIO_WritePin(LED_PORT, LED_PIN, GPIO_PIN_SET);
+  } else {
+    // Désactivez la LED
+    HAL_GPIO_WritePin(LED_PORT, LED_PIN, GPIO_PIN_RESET);
+  }
   return 0;
 }
 
