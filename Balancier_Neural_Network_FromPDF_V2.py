@@ -87,10 +87,12 @@ if scores[0] < 0.7 and scores[1] < 0.3:
     os.makedirs(output_folder, exist_ok=True)
     model_filename = f"{output_folder}/Accuracy{scores[2]:.2f}_Loss{scores[1]:.2f}.h5"
 
+    """
     # Save the model in HDF5 format
     h5_model_filename = f"{output_folder}/modelOnly_Acc{scores[2]:.2f}_Loss{scores[1]:.2f}_MSE{scores[0]:.2f}.h5"
     model.save(h5_model_filename)
     print(f"Model saved in HDF5 format to {h5_model_filename}")
+    """
 
     # Save the weights separately in HDF5 format
     weights_filename = f"{output_folder}/modelWeights_Acc{scores[2]:.2f}_Loss{scores[1]:.2f}_MSE{scores[0]:.2f}.h5"
