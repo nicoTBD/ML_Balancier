@@ -1,0 +1,133 @@
+Neural Network Tools for STM32AI v1.7.0 (STM.ai v8.0.1-19451)
+Created date          : 2024-01-08 14:34:55
+Parameters            : generate --name dummynn -m C:/Users/CorentinLEROY/Downloads/Réseau de neurone dummy-20240108/dummy_nn.h5 -m C:/Users/CorentinLEROY/Downloads/Réseau de neurone dummy-20240108/dummy_nn.json --type keras --compression none --verbosity 1 --workspace C:\Users\CORENT~1\AppData\Local\Temp\mxAI_workspace102360289730300476686410049850228 --output C:\Users\CorentinLEROY\.stm32cubemx\dummynn_output --allocate-inputs --series stm32l4 --allocate-outputs
+
+Exec/report summary (generate)
+--------------------------------------------------------------------------------------------------------------
+model file         :   C:\Users\CorentinLEROY\Downloads\Réseau de neurone dummy-20240108\dummy_nn.h5          
+model file         :   C:\Users\CorentinLEROY\Downloads\Réseau de neurone dummy-20240108\dummy_nn.json        
+type               :   keras                                                                                  
+c_name             :   dummynn                                                                                
+compression        :   none                                                                                   
+options            :   allocate-inputs, allocate-outputs                                                      
+optimization       :   balanced                                                                               
+target/series      :   stm32l4                                                                                
+workspace dir      :   C:\Users\CORENT~1\AppData\Local\Temp\mxAI_workspace102360289730300476686410049850228   
+output dir         :   C:\Users\CorentinLEROY\.stm32cubemx\dummynn_output                                     
+model_fmt          :   float                                                                                  
+model_name         :   dummy_nn                                                                               
+model_hash         :   41dda347af22f9fd43c4e2bdce154c6f                                                       
+params #           :   141 items (564 B)                                                                      
+--------------------------------------------------------------------------------------------------------------
+input 1/1          :   'input_0' (domain:activations/**default**)                                             
+                   :   5 items, 20 B, ai_float, float, (1,1,1,5)                                              
+output 1/1         :   'dense_1' (domain:activations/**default**)                                             
+                   :   1 items, 4 B, ai_float, float, (1,1,1,1)                                               
+macc               :   171                                                                                    
+weights (ro)       :   564 B (564 B) (1 segment)                                                              
+activations (rw)   :   100 B (100 B) (1 segment) *                                                            
+ram (total)        :   100 B (100 B) = 100 + 0 + 0                                                            
+--------------------------------------------------------------------------------------------------------------
+(*) 'input'/'output' buffers can be used from the activations buffer
+
+Model name - dummy_nn ['input_0'] ['dense_1']
+------ ------------------------------- --------------- ------------ ------ --------------- --- --------------- --------------- ----------------------------- 
+m_id   layer (type,original)           oshape          param/size     macc    connected to   | c_size          c_macc          c_type                        
+------ ------------------------------- --------------- ------------ ------ --------------- --- --------------- --------------- ----------------------------- 
+0      input_0 (Input, None)           [b:None,c:5]                                          | +480(+100.0%)   +140(+100.0%)   dense_of32/nl_of32[0, 1]      
+       dense_dense (Dense, Dense)      [b:None,c:20]   120/480         120         input_0   | -480(-100.0%)   -120(-100.0%)   
+       dense (Nonlinearity, Dense)     [b:None,c:20]                    20     dense_dense   |                 -20(-100.0%)    
+------ ------------------------------- --------------- ------------ ------ --------------- --- --------------- --------------- ----------------------------- 
+1      dense_1_dense (Dense, Dense)    [b:None,c:1]    21/84            21           dense   |                 +10(+47.6%)     dense_of32/nl_of32[o][2, 3]   
+       dense_1 (Nonlinearity, Dense)   [b:None,c:1]                     10   dense_1_dense   |                 -10(-100.0%)    
+------ ------------------------------- --------------- ------------ ------ --------------- --- --------------- --------------- ----------------------------- 
+model/c-model: macc=171/171  weights=564/564  activations=--/100 io=--/0
+
+
+
+Generated C-graph summary
+------------------------------------------------------------------------------------------------------------------------
+model name            : dummy_nn
+c-name                : dummynn
+c-node #              : 4
+c-array #             : 9
+activations size      : 100 (1 segment)
+weights size          : 564 (1 segment)
+macc                  : 171
+inputs                : ['input_0_output']
+outputs               : ['dense_1_output']
+
+C-Arrays (9)
+------ ----------------------- ----------- ------------------------- ------------- --------- --------- 
+c_id   name (*_array)          item/size   domain/mem-pool           c-type        fmt       comment   
+------ ----------------------- ----------- ------------------------- ------------- --------- --------- 
+0      dense_dense_output      20/80       activations/**default**   float         float32             
+1      dense_output            20/80       activations/**default**   float         float32             
+2      dense_1_dense_output    1/4         activations/**default**   float         float32             
+3      dense_1_output          1/4         activations/**default**   float         float32   /output   
+4      dense_dense_weights     100/400     weights/weights           const float   float32             
+5      dense_dense_bias        20/80       weights/weights           const float   float32             
+6      dense_1_dense_weights   20/80       weights/weights           const float   float32             
+7      dense_1_dense_bias      1/4         weights/weights           const float   float32             
+8      input_0_output          5/20        activations/**default**   float         float32   /input    
+------ ----------------------- ----------- ------------------------- ------------- --------- --------- 
+
+C-Layers (4)
+------ ---------------- ---- ------------ ------ ----- -------------------------- ------------------ 
+c_id   name (*_layer)   id   layer_type   macc   rom   tensors                    shape (array id)   
+------ ---------------- ---- ------------ ------ ----- -------------------------- ------------------ 
+0      dense_dense      0    dense        120    480   I: input_0_output          (1,1,1,5) (8)      
+                                                       W: dense_dense_weights     (5,1,1,20) (4)     
+                                                       W: dense_dense_bias        (1,1,1,20) (5)     
+                                                       O: dense_dense_output      (1,1,1,20) (0)     
+------ ---------------- ---- ------------ ------ ----- -------------------------- ------------------ 
+1      dense            0    nl           20     0     I: dense_dense_output      (1,1,1,20) (0)     
+                                                       O: dense_output            (1,1,1,20) (1)     
+------ ---------------- ---- ------------ ------ ----- -------------------------- ------------------ 
+2      dense_1_dense    1    dense        21     84    I: dense_output            (1,1,1,20) (1)     
+                                                       W: dense_1_dense_weights   (20,1,1,1) (6)     
+                                                       W: dense_1_dense_bias      (1,1,1,1) (7)      
+                                                       O: dense_1_dense_output    (1,1,1,1) (2)      
+------ ---------------- ---- ------------ ------ ----- -------------------------- ------------------ 
+3      dense_1          1    nl           10     0     I: dense_1_dense_output    (1,1,1,1) (2)      
+                                                       O: dense_1_output          (1,1,1,1) (3)      
+------ ---------------- ---- ------------ ------ ----- -------------------------- ------------------ 
+
+
+
+Number of operations per c-layer
+------- ------ ----------------------- ----- -------------- -------- ---------- 
+c_id    m_id   name (type)               #op           type   #param   sparsity 
+------- ------ ----------------------- ----- -------------- -------- ---------- 
+0       0      dense_dense (dense)       120   smul_f32_f32      120     0.0000 
+1       0      dense (nl)                 20     op_f32_f32          
+2       1      dense_1_dense (dense)      21   smul_f32_f32       21     0.0000 
+3       1      dense_1 (nl)               10     op_f32_f32          
+------- ------ ----------------------- ----- -------------- -------- ---------- 
+total                                    171                     141     0.0000 
+
+Number of operation types
+---------------- ----- ----------- 
+operation type       #           % 
+---------------- ----- ----------- 
+smul_f32_f32       141       82.5% 
+op_f32_f32          30       17.5% 
+
+Complexity report (model)
+------ --------------- ------------------------- ------------------------- -------- 
+m_id   name            c_macc                    c_rom                     c_id     
+------ --------------- ------------------------- ------------------------- -------- 
+0      input_0         ||||||||||||||||  81.9%   ||||||||||||||||  85.1%   [0, 1]   
+1      dense_1_dense   ||||              18.1%   |||               14.9%   [2, 3]   
+------ --------------- ------------------------- ------------------------- -------- 
+macc=171 weights=564 act=100 ram_io=0
+
+Generated files (7)
+-------------------------------------------------------------------------- 
+C:\Users\CorentinLEROY\.stm32cubemx\dummynn_output\dummynn_config.h        
+C:\Users\CorentinLEROY\.stm32cubemx\dummynn_output\dummynn.h               
+C:\Users\CorentinLEROY\.stm32cubemx\dummynn_output\dummynn.c               
+C:\Users\CorentinLEROY\.stm32cubemx\dummynn_output\dummynn_data_params.h   
+C:\Users\CorentinLEROY\.stm32cubemx\dummynn_output\dummynn_data_params.c   
+C:\Users\CorentinLEROY\.stm32cubemx\dummynn_output\dummynn_data.h          
+C:\Users\CorentinLEROY\.stm32cubemx\dummynn_output\dummynn_data.c          
